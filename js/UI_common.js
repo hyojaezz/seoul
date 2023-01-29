@@ -6,6 +6,9 @@ var front = {
         this.mainSlider();
         this.imgBannerSlide();
         this.topBtn();
+        this.mHeader();
+        this.asideMenu();
+        this.snbMenu();
     },
 
     mainSlider: function() {
@@ -93,6 +96,7 @@ var front = {
             $('.img_banner_wrap .bx-stop').css('display', 'inline-block');
         });
     },
+
     // 탑버튼
     topBtn: function() {
         console.log(front._scrollTop);
@@ -104,6 +108,70 @@ var front = {
         }
     },
 
+    // 반응형  header 영역
+    mHeader: function() {
+        // nav 열림
+        $('#mGnb .btn_nav').on('click', function(){
+            $('#nav').show();
+        });
+        // nav 닫힘
+        $('#nav .btn_nav_close').on('click', function(){
+            $('#nav').hide();
+        });
+
+        var btnDepth = $('.m_all_menu>li>a');
+        var btnDepthList = $('.m_all_menu>li');
+        var btnDepth3 = $('.depth3_more>a');
+
+        // nav 좌측 메뉴
+        btnDepth.each(function(){
+            btnDepth.click(function(){
+                btnDepthList.removeClass('active');
+                $(this).parent().addClass('on').siblings().removeClass('on');
+                $(this).siblings('.depth2').show().parent().siblings().find('.depth2').hide();
+            });
+        })
+
+        // depth3 처리
+        btnDepth.on('click', function(){
+            $('.depth3').removeClass('on');
+        });
+
+        btnDepth3.on('click',function(){
+           $(this).siblings().toggleClass('on').parent().siblings().find('.depth3').removeClass('on');
+        });
+
+        // 검색영역 버튼
+        $('#mGnb .btn_search').on('click', function() {
+            $('#mGnb .header_search').toggleClass('on');
+            // $('#mGnb').toggleClass('on');
+        });
+    },
+    // aside 영역
+    asideMenu:function(){
+
+        var asideMenu = $('.snb>ul>li');
+
+        // $('.snb>ul>li>a').click(function(e){
+        //     e.preventDefault();
+        //     $(this).parent().toggleClass('on').siblings().removeClass('on');
+        // });
+
+        $('.snb .menu').each(function(){
+            $('.snb .menu>a').click(function(){
+                $(this).parent().toggleClass('on')
+            });
+        });
+    },
+
+    // 반응형 SNB 영역
+    snbMenu: function(){
+        $('.m_snb h2>a').on('click',function(){
+            $(this).toggleClass('on');
+            $('.m_snb .m_snb_menu').slideToggle();
+        });
+    },
+    
 
 
 }
@@ -121,3 +189,6 @@ $(document).ready(function() {
       });
 
 });
+
+
+
